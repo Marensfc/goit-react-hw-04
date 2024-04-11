@@ -3,13 +3,13 @@ import { fetchPhotosByQuery } from "../../api/unsplash-api";
 import { useEffect, useRef, useState } from "react";
 import { useModal } from "../../utils/hooks/UseModal";
 import toast, { Toaster } from "react-hot-toast";
-import { MagnifyingGlass } from "react-loader-spinner";
 
 import SearchBar from "../search-bar/SearchBar";
 import ImmageGallery from "../image-gallery/ImmageGallery";
 import LoadMoreBtn from "../load-more-btn/LoadMoreBtn";
 import ImageModal from "../image-modal/ImageModal";
 import ErrorMessage from "../error-message/ErrorMessage";
+import Loader from "../loader/Loader";
 
 function App() {
   const [images, setImages] = useState([]);
@@ -27,7 +27,7 @@ function App() {
     evt.preventDefault();
 
     const form = evt.target;
-    const searchValue = form.elements.search.value;
+    const searchValue = form.elements.search.value.trim();
 
     if (searchValue === "") {
       alert("Please enter the text in the field");
@@ -37,6 +37,10 @@ function App() {
     setQuery(searchValue);
     setPage(1);
     form.reset();
+  };
+
+  const addPage = () => {
+    setPage(page + 1);
   };
 
   useEffect(() => {
@@ -84,15 +88,15 @@ function App() {
     <>
       <div className={css.appContainer}>
         <Toaster />
-        <SearchBar onSubmit={handleOnSubmit} />
+        <SearchBar handleOnSubmit={handleOnSubmit} />
         {error && <ErrorMessage />}
         <ImmageGallery
           images={images}
           openModal={openModal}
           setSelectedImg={setSelectedImg}
         />
-        {loader && <MagnifyingGlass />}
-        {showBtn && <LoadMoreBtn setPage={setPage} page={page} />}
+        {loader && <Loader />}
+        {showBtn && <LoadMoreBtn addPage={addPage} />}
         {selectedImg && (
           <ImageModal
             modalIsOpen={modalIsOpen}

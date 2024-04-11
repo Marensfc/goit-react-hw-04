@@ -16,14 +16,13 @@ const ImageCard = ({
 
   return (
     <div className={css.thumb}>
-      <a href="#id" className={css.galleryLinkImage} onClick={handleOnClick}>
-        <img
-          id={id}
-          src={smallImg}
-          alt={altDescription}
-          data-regular={regularImg}
-        />
-      </a>
+      <img
+        id={id}
+        src={smallImg}
+        alt={altDescription}
+        data-regular={regularImg}
+        onClick={handleOnClick}
+      />
     </div>
   );
 };

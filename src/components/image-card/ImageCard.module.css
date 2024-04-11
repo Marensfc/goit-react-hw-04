@@ -9,6 +9,10 @@
   object-fit: cover;
 }
 
+.thumb img:hover {
+  cursor: pointer;
+}
+
 .galleryLinkImage {
   display: block;
   width: 100%;

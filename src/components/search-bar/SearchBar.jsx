@@ -1,9 +1,9 @@
 import css from "./SearchBar.module.css";
 
-const SearchBar = ({ onSubmit }) => {
+const SearchBar = ({ handleOnSubmit }) => {
   return (
     <header className={css.header}>
-      <form onSubmit={onSubmit} className={css.form}>
+      <form onSubmit={handleOnSubmit} className={css.form}>
         <input
           className={css.searchInput}
           type="text"
